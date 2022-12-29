@@ -1,0 +1,90 @@
+syntax = "proto3";
+
+package movie;
+
+option go_package = "./pkg/movie/pb";
+
+import "google/protobuf/timestamp.proto";
+
+service MovieService {
+  rpc CreateMovie(CreateMovieRequest) returns (StatusResponse) {}
+  rpc DeleteMovie(MovieByUserRequest) returns (StatusResponse) {}
+  rpc FindMovie(FindMovieRequest) returns (MovieResponse) {}
+  rpc MoviesList(MoviesListRequest) returns (MoviesListResponse) {}
+  rpc UpdateMovie(UpdateMovieRequest) returns (StatusResponse) {}
+  rpc UpdateCover(UpdateCoverRequest) returns (StatusResponse) {}
+}
+
+message Movie {
+  uint32 id = 1;
+  string name = 2;
+  string description = 3;
+  google.protobuf.Timestamp date = 4;
+  float rate = 5;
+  string cover = 6;
+  uint64 userId = 7;
+}
+
+// create movie
+message CreateMovieRequest {
+  string name = 1;
+  string description = 2;
+  google.protobuf.Timestamp date = 3;
+  uint64 userId = 4;
+}
+
+// delete the movie you created
+message MovieByUserRequest {
+  uint32 movieId = 1;
+  uint64 userId = 2;
+}
+
+// status response for movie
+message StatusResponse {
+  string status = 1;
+  string error = 2;
+}
+
+// get movie information
+message FindMovieRequest {
+  uint32 id = 1;
+}
+
+// movie response
+message MovieResponse {
+  Movie movie = 1;
+  string status = 2;
+  string error = 3;
+}
+
+// movies list request
+message MoviesListRequest {
+  string sortBy = 1;
+  string direction = 2;
+  uint32 page = 3;
+  uint32 size = 4;
+}
+
+// list of movies response
+message MoviesListResponse {
+  repeated Movie movies = 1;
+  string status = 2;
+  string error = 3;
+}
+
+// update movie
+message UpdateMovieRequest {
+  uint32 movieId = 1;
+  string name = 2;
+  string description = 3;
+  google.protobuf.Timestamp date = 4;
+  uint64 userId = 5;
+
+}
+
+// update cover of movie request
+message UpdateCoverRequest {
+  uint32 movieId = 1;
+  string coverName = 2;
+  uint64 userId = 3;
+}

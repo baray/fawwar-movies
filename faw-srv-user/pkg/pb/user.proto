@@ -1,0 +1,49 @@
+
+syntax = "proto3";
+
+package user;
+
+option go_package = "./pkg/user/pb";
+
+service UserService {
+  rpc Register(RegisterRequest) returns (RegisterResponse) {}
+  rpc Login(LoginRequest) returns (LoginResponse) {}
+  rpc Authenticated(AuthRequest) returns (AuthResponse) {}
+}
+
+// Register
+
+message RegisterRequest {
+  string fullname = 1;
+  uint32 age = 2;
+  string email = 3;
+  string password = 4;
+}
+
+message RegisterResponse {
+  int64 status = 1;
+  string error = 2;
+}
+
+// Login
+
+message LoginRequest {
+  string email = 1;
+  string password = 2;
+}
+
+message LoginResponse {
+  int64 status = 1;
+  string error = 2;
+  string token = 3;
+}
+
+// check has authenticated
+
+message AuthRequest { string token = 1; }
+
+message AuthResponse {
+  int64 status = 1;
+  string error = 2;
+  int64 userId = 3;
+}
