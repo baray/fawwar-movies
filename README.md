@@ -53,8 +53,12 @@ the token is encrypted.
 
 
 To build we need to run the four apps
+
 $ cd faw-srv-watched && go run cmd/main.go
+
 $ cd faw-srv-user && go run cmd/main.go
+
 $ cd faw-srv-movie && go run cmd/main.go
+
 $ cd faw-api-gateway && go run cmd/main.go
 
