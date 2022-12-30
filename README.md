@@ -50,3 +50,11 @@ the token is encrypted.
 	Create an account [POST] /watches/[id]/rating
 		- takes the rating as a query parameter from the user, the user must have watched the movie and 
   must have the token.
+
+
+To build we need to run the four apps
+$ cd faw-srv-watched && go run cmd/main.go
+$ cd faw-srv-user && go run cmd/main.go
+$ cd faw-srv-movie && go run cmd/main.go
+$ cd faw-api-gateway && go run cmd/main.go
+
